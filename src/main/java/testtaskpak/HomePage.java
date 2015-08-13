@@ -43,11 +43,13 @@ public class HomePage {
     	return (divEmailError.isDisplayed());
     }
     
-    public void setEmail(String s){
+    public void setEmail(String s) throws InterruptedException{
     	iEmail.clear();
+    	Thread.sleep(300);
     	iEmail.click();
     	iEmail.sendKeys(s);
     	iPassword.click();
+    	Thread.sleep(300);
     }
     
 }
