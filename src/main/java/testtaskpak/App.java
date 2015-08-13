@@ -2,9 +2,12 @@ package testtaskpak;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 //import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * Hello world!
@@ -27,7 +30,8 @@ public class App
 	        	System.out.println("Passed.");
 	        
 	        mainPage.signUpClick();
-	        driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS); //not good, but quick
+	        WebDriverWait wait = new WebDriverWait(driver, 5);
+	        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("email")));
 	        
 	        System.out.print("SignUp button click. SignUp visibility test: ");
 	        if (!mainPage.isSignUpVisible()) 
@@ -39,7 +43,7 @@ public class App
 	        for (String s:ivEmails){
 	        	System.out.print("Email field. Enter invalid email " + s + ": ");
 	        	mainPage.setEmail(s);
-	        	driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS); //not good, but quick
+	        	//wait.until(ExpectedConditions. visibilityOfElementLocated(By.cssSelector("div.formerror-instagram-email.formerror"))); //doesn't work with such Selector
 	        	if (mainPage.isEmailErrorMessageDisplayed())
 	        		System.out.println("Passed.");
 	        	else 
